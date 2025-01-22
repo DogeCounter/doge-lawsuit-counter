@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOGE Lawsuit Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+        .counter-container {
+            position: relative;
+            display: inline-block;
+        }
+        .counter {
+            font-size: 60px;
+            color: #ff0000;
+            font-weight: bold;
+            position: absolute;
+            top: 120%; /* Flytter kun telleren nedover */
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .clock-container {
+            margin-top: 100px; /* Øker avstanden nedover */
+            font-size: 20px;
+            color: #333;
+        }
+        img {
+            width: 50%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Department of Government Efficiency (DOGE) Lawsuit Counter</h1>
+    <div class="counter-container">
+        <img src="doge-counter-3.png" alt="DOGE Counter">
+        <div class="counter" id="lawsuitCounter">0003</div>
+    </div>
+
+    <div class="clock-container">
+        <h2>Time Elapsed Since Last Lawsuit</h2>
+        <div id="countUpClock">Loading...</div>
+    </div>
+
+    <script>
+        // Lawsuit Counter Logic
+        let lawsuits = 3; // Starting number of lawsuits
+        const startTime = new Date().getTime() - (17 * 60 * 60 * 1000); // 17 hours ago
+        
+
+        function updateCounter() {
+            const now = new Date().getTime();
+            const elapsedTime = now - startTime;
+            lawsuits = 3 + Math.floor(elapsedTime / incrementInterval); // Calculate lawsuits based on time
+            document.getElementById('lawsuitCounter').textContent = lawsuits.toString().padStart(4, '0'); // Display lawsuits with leading zeros
+        }
+
+        // Clock Logic
+        function updateClock() {
+            const startDate = new Date('2025-01-20T18:00:00');
+            const now = new Date();
+
+            // Calculate elapsed time
+            const elapsed = now - startDate;
+
+            // Convert to days, hours, minutes, and seconds
+            const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById('countUpClock').textContent = 
+                `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+        }
+
+        // Update counters and clock every second
+        setInterval(updateCounter, 1000);
+        setInterval(updateClock, 1000);
+        updateCounter(); // Initial run
+        updateClock(); // Initial run
+    </script>
+</body>
+</html>
