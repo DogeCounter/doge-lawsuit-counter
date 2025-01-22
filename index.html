@@ -29,6 +29,16 @@
             font-size: 20px;
             color: #333;
         }
+        .contract-address {
+            margin-top: 50px;
+            font-size: 18px;
+            color: #333;
+        }
+        .contract-address p {
+            font-weight: bold;
+            color: #007bff;
+            word-wrap: break-word;
+        }
         img {
             width: 50%;
             max-width: 500px;
@@ -47,11 +57,16 @@
         <div id="countUpClock">Loading...</div>
     </div>
 
+    <div class="contract-address">
+        <h3>Token Contract Address:</h3>
+        <p id="contractAddress">Address will be added soon...</p>
+    </div>
+
     <script>
         // Lawsuit Counter Logic
         let lawsuits = 3; // Starting number of lawsuits
         const startTime = new Date().getTime() - (17 * 60 * 60 * 1000); // 17 hours ago
-        
+        const incrementInterval = 12 * 60 * 60 * 1000; // Add 1 lawsuit every 12 hours
 
         function updateCounter() {
             const now = new Date().getTime();
